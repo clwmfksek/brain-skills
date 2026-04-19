@@ -1,0 +1,34 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/hyohwan/Documents/main/develop/TaskFolder/.claude/hooks/session-start-inject.sh"
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/hyohwan/Documents/main/develop/TaskFolder/.claude/hooks/pre-exit-check.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/hyohwan/Documents/main/develop/TaskFolder/.claude/hooks/task-end-check.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
