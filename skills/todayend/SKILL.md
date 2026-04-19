@@ -9,6 +9,16 @@ description: 하루 마무리. 오늘 세션 로그들을 취합해 brain/04_arc
 
 하루 마지막에 사용자가 수동 호출.
 
+## 실행 모델
+
+Sonnet subagent 위임 권장 (대량 파일 I/O + 병합):
+```
+Agent(subagent_type="oh-my-claudecode:executor", model="sonnet",
+      description="todayend: 하루 통합 + 금요일 주간 로그",
+      prompt="<수행 순서 전체 + $BRAIN + 오늘 날짜 + 금요일 여부>")
+```
+subagent가 세션 수집·git 스캔·archive 작성·roadmap 업데이트·금요일 주간 로그까지 일괄. **프로젝트 문서 반영 y/n 확인(step 6)은 메인 Claude**.
+
 ## 수행 순서
 
 1. **날짜**: `DATE=$(date +%Y-%m-%d)`.

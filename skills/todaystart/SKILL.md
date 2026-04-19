@@ -7,6 +7,16 @@ description: 하루 시작 시 수동 호출. archive/daily의 최근 요약과 
 
 `BRAIN=/Users/hyohwan/Documents/main/brain`
 
+## 실행 모델
+
+Sonnet subagent 위임 권장:
+```
+Agent(subagent_type="oh-my-claudecode:executor", model="sonnet",
+      description="todaystart: 오늘 plan 생성",
+      prompt="<수행 순서 1~6 + $BRAIN>")
+```
+subagent가 archive/roadmap 스캔 + plan 초안 생성. 메인 Claude는 브리핑(step 7)과 "수정할 것" 사용자 입력만 처리.
+
 ## 수행 순서
 
 1. **날짜**: `DATE=$(date +%Y-%m-%d)`.

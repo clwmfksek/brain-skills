@@ -161,6 +161,22 @@ gh repo create <username>/brain --private --source=. --push
 
 ---
 
+## 💰 모델 정책 (비용 최적화)
+
+각 skill은 **Sonnet subagent 위임**을 권장합니다. 메인 세션이 Opus여도 skill의 I/O·분석 부분은 Sonnet으로 실행해 비용 ~80% 절감.
+
+- 파일 스캔·분석·저장 → Sonnet executor agent
+- 사용자 y/n 확인 / 커밋 승인 / 최종 결정 → 메인 Claude
+
+각 SKILL.md 상단 "## 실행 모델" 섹션에 위임 코드 예시가 있습니다.
+
+### 비용 비교 (하루 약 30k tok 기준)
+| 모델 정책 | 일 | 월(주5) | 년 |
+|---|---|---|---|
+| 전체 Opus 4.7 | $0.77 | $15 | $185 |
+| **스킬만 Sonnet 위임** | **$0.20** | **$4** | **$48** |
+| 전체 Sonnet | $0.15 | $3 | $37 |
+
 ## ⚙️ Progressive Disclosure
 
 일부 스킬은 조건부 상세 로직을 `references/` 하위 파일로 분리해 기본 로드를 가볍게 했습니다:

@@ -9,6 +9,17 @@ description: 세션 종료 직전 이번 세션 요약을 brain/00_inbox/session
 
 세션 종료 전 작업 요약 저장. UserPromptSubmit hook이 종료 명령을 차단하며 이 skill을 유도합니다.
 
+## 실행 모델
+
+**세션 요약 작성은 메인 Claude가 담당** (세션 대화가 메인 컨텍스트에 있음).
+나머지 파일 I/O(저장, 번호 부여, 중복 체크)는 Sonnet subagent 위임 가능:
+```
+Agent(subagent_type="oh-my-claudecode:executor", model="sonnet",
+      description="endwrite: 세션 로그 저장 + EXP/ADR 후보 처리",
+      prompt="<요약 본문 + $BRAIN + EXP/ADR 후보 리스트>")
+```
+**y/n 확인은 메인 Claude**. 저장/마커 생성만 subagent.
+
 ## 수행 순서
 
 1. **시각/세션 ID**:

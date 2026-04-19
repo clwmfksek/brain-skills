@@ -9,6 +9,16 @@ description: 세션 중간 진척도 체크. 오늘 daily plan 체크리스트 +
 
 세션 중간에 사용자가 수동 호출. "오늘 얼마나 했지?" 확인.
 
+## 실행 모델
+
+근거 수집/진척도 분석까지 Sonnet subagent 위임:
+```
+Agent(subagent_type="oh-my-claudecode:executor", model="sonnet",
+      description="todaying: 진척도 분석",
+      prompt="<수행 순서 1~3 + $BRAIN + 오늘 날짜>")
+```
+subagent는 분석 결과(완료 후보 목록, 상태 요약)를 반환. **완료 체크/새 task 추가 등 y/n 확인(step 4~5)은 메인 Claude가 처리**. 승인된 편집만 subagent가 수행 또는 메인이 직접.
+
 ## 수행 순서
 
 1. **오늘 daily plan 읽기**
